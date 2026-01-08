@@ -1,0 +1,169 @@
+<div class="form-container">
+  <div class="form-card">
+    <h2>Edit Student</h2>
+
+    <!-- Loading Initial Data -->
+    <div *ngIf="isLoadingStudent" class="spinner">
+      <div class="spinner-border"></div>
+      <p>Loading student data...</p>
+    </div>
+
+    <!-- Success Message -->
+    <div *ngIf="successMessage" class="alert alert-success">
+      <span>{{ successMessage }}</span>
+      <button class="btn-close" (click)="clearSuccessMessage()">×</button>
+    </div>
+
+    <!-- Error Message -->
+    <div *ngIf="error" class="alert alert-danger">
+  {{ error }}
+    </div>
+
+    <!-- Loading Spinner -->
+    <div *ngIf="loading" class="spinner">
+  <div class="spinner-border"></div>
+      <p>Updating student...</p>
+    </div>
+
+    <!-- Form -->
+    <form *ngIf="!isLoadingStudent && !loading" [formGroup]="studentForm" (ngSubmit)="onSubmit()" class="form">
+      <!-- Name Field (Required) -->
+      <div class="form-group">
+   <label for="stdname">Name *</label>
+        <input
+       type="text"
+id="stdname"
+    formControlName="stdname"
+          class="form-control"
+   placeholder="Enter student name"
+          [class.is-invalid]="studentForm.get('stdname')?.invalid && studentForm.get('stdname')?.touched"
+    />
+      <div class="error-message" *ngIf="studentForm.get('stdname')?.invalid && studentForm.get('stdname')?.touched">
+  {{ getErrorMessage('stdname') }}
+        </div>
+      </div>
+
+ <!-- Mobile Number Field -->
+      <div class="form-group">
+        <label for="mobileno">Mobile Number</label>
+        <input
+        type="tel"
+          id="mobileno"
+        formControlName="mobileno"
+          class="form-control"
+  placeholder="Enter mobile number"
+          [class.is-invalid]="studentForm.get('mobileno')?.invalid && studentForm.get('mobileno')?.touched"
+        />
+        <div class="error-message" *ngIf="studentForm.get('mobileno')?.invalid && studentForm.get('mobileno')?.touched">
+          {{ getErrorMessage('mobileno') }}
+      </div>
+      </div>
+
+      <!-- Email Field -->
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+ class="form-control"
+        placeholder="Enter email"
+      [class.is-invalid]="studentForm.get('email')?.invalid && studentForm.get('email')?.touched"
+/>
+        <div class="error-message" *ngIf="studentForm.get('email')?.invalid && studentForm.get('email')?.touched">
+          {{ getErrorMessage('email') }}
+        </div>
+      </div>
+
+      <!-- City and State (Two Columns) -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="city">City</label>
+          <input
+        type="text"
+       id="city"
+      formControlName="city"
+   class="form-control"
+    placeholder="Enter city"
+            [class.is-invalid]="studentForm.get('city')?.invalid && studentForm.get('city')?.touched"
+          />
+          <div class="error-message" *ngIf="studentForm.get('city')?.invalid && studentForm.get('city')?.touched">
+       {{ getErrorMessage('city') }}
+          </div>
+        </div>
+
+        <div class="form-group">
+    <label for="state">State</label>
+          <input
+    type="text"
+ id="state"
+    formControlName="state"
+      class="form-control"
+     placeholder="Enter state"
+         [class.is-invalid]="studentForm.get('state')?.invalid && studentForm.get('state')?.touched"
+          />
+  <div class="error-message" *ngIf="studentForm.get('state')?.invalid && studentForm.get('state')?.touched">
+        {{ getErrorMessage('state') }}
+ </div>
+        </div>
+      </div>
+
+      <!-- Pincode Field -->
+      <div class="form-group">
+        <label for="pincode">Pincode</label>
+        <input
+  type="text"
+  id="pincode"
+          formControlName="pincode"
+  class="form-control"
+          placeholder="Enter pincode"
+   [class.is-invalid]="studentForm.get('pincode')?.invalid && studentForm.get('pincode')?.touched"
+    />
+        <div class="error-message" *ngIf="studentForm.get('pincode')?.invalid && studentForm.get('pincode')?.touched">
+    {{ getErrorMessage('pincode') }}
+        </div>
+      </div>
+
+      <!-- Address Fields -->
+      <div class="form-group">
+        <label for="address1">Address Line 1</label>
+        <textarea
+    id="address1"
+          formControlName="address1"
+   class="form-control"
+  placeholder="Enter address line 1"
+          rows="2"
+  [class.is-invalid]="studentForm.get('address1')?.invalid && studentForm.get('address1')?.touched"
+        ></textarea>
+        <div class="error-message" *ngIf="studentForm.get('address1')?.invalid && studentForm.get('address1')?.touched">
+   {{ getErrorMessage('address1') }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="address2">Address Line 2</label>
+        <textarea
+          id="address2"
+          formControlName="address2"
+          class="form-control"
+          placeholder="Enter address line 2"
+          rows="2"
+          [class.is-invalid]="studentForm.get('address2')?.invalid && studentForm.get('address2')?.touched"
+        ></textarea>
+        <div class="error-message" *ngIf="studentForm.get('address2')?.invalid && studentForm.get('address2')?.touched">
+ {{ getErrorMessage('address2') }}
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary" [disabled]="loading">
+    Update Student
+        </button>
+        <button type="button" class="btn btn-secondary" (click)="cancel()" [disabled]="loading">
+        Cancel
+        </button>
+ </div>
+    </form>
+  </div>
+</div>

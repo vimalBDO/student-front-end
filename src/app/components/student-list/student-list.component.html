@@ -1,0 +1,73 @@
+<div class="student-list-container">
+  <!-- Header -->
+  <div class="list-header">
+    <h1>Student Management</h1>
+    <button class="btn btn-primary" (click)="createStudent()">
+      + Add New Student
+    </button>
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="error" class="alert alert-danger">
+ <span>{{ error }}</span>
+    <button class="btn-close" (click)="retryLoadStudents()">Retry</button>
+  </div>
+
+  <!-- Loading Spinner -->
+<div *ngIf="loading" class="spinner">
+    <div class="spinner-border"></div>
+    <p>Loading students...</p>
+  </div>
+
+  <!-- Students Table -->
+  <div *ngIf="!loading && students.length > 0" class="table-responsive">
+    <table class="table">
+ <thead>
+    <tr>
+ <th>ID</th>
+          <th>Name</th>
+    <th>Mobile</th>
+   <th>Email</th>
+        <th>City</th>
+          <th>State</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let student of students">
+  <td>{{ student.stdid }}</td>
+   <td>{{ student.stdname }}</td>
+        <td>{{ student.mobileno || '-' }}</td>
+          <td>{{ student.email || '-' }}</td>
+       <td>{{ student.city || '-' }}</td>
+   <td>{{ student.state || '-' }}</td>
+          <td>
+            <button 
+              class="btn btn-sm btn-info"
+          (click)="viewStudent(student.stdid)"
+     title="View Details">
+              ??? View
+       </button>
+            <button 
+          class="btn btn-sm btn-warning"
+         (click)="editStudent(student.stdid)"
+              title="Edit">
+          ?? Edit
+ </button>
+            <button 
+    class="btn btn-sm btn-danger"
+     (click)="deleteStudent(student.stdid, student.stdname)"
+  title="Delete">
+   ??? Delete
+       </button>
+    </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="!loading && students.length === 0 && !error" class="empty-state">
+<p>No students found. Click "Add New Student" to create one.</p>
+  </div>
+</div>

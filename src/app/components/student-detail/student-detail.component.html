@@ -1,0 +1,87 @@
+<div class="detail-container">
+  <!-- Loading Spinner -->
+<div *ngIf="loading" class="spinner">
+    <div class="spinner-border"></div>
+    <p>Loading student details...</p>
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="error && !loading" class="alert alert-danger">
+    <p>{{ error }}</p>
+    <button class="btn btn-secondary" (click)="backToList()">Back to List</button>
+  </div>
+
+  <!-- Student Details -->
+  <div *ngIf="student && !loading" class="detail-card">
+ <div class="detail-header">
+ <h1>{{ student.stdname }}</h1>
+<div class="header-actions">
+        <button class="btn btn-warning" (click)="editStudent()">?? Edit</button>
+        <button class="btn btn-danger" (click)="deleteStudent()">??? Delete</button>
+        <button class="btn btn-secondary" (click)="backToList()">? Back</button>
+      </div>
+</div>
+
+    <div class="detail-body">
+      <!-- Student ID -->
+    <div class="detail-field">
+        <label>Student ID:</label>
+    <p>{{ student.stdid }}</p>
+      </div>
+
+      <!-- Name -->
+      <div class="detail-field">
+        <label>Name:</label>
+ <p>{{ student.stdname }}</p>
+      </div>
+
+      <!-- Mobile Number -->
+      <div class="detail-field">
+        <label>Mobile Number:</label>
+        <p>{{ student.mobileno || '—' }}</p>
+      </div>
+
+      <!-- Email -->
+      <div class="detail-field">
+        <label>Email:</label>
+        <p>{{ student.email || '—' }}</p>
+      </div>
+
+      <!-- City and State -->
+      <div class="detail-row">
+        <div class="detail-field">
+          <label>City:</label>
+        <p>{{ student.city || '—' }}</p>
+        </div>
+      <div class="detail-field">
+   <label>State:</label>
+          <p>{{ student.state || '—' }}</p>
+        </div>
+    </div>
+
+    <!-- Pincode -->
+      <div class="detail-field">
+        <label>Pincode:</label>
+        <p>{{ student.pincode || '—' }}</p>
+      </div>
+
+      <!-- Address Line 1 -->
+      <div class="detail-field">
+        <label>Address Line 1:</label>
+        <p>{{ student.address1 || '—' }}</p>
+    </div>
+
+      <!-- Address Line 2 -->
+      <div class="detail-field">
+      <label>Address Line 2:</label>
+ <p>{{ student.address2 || '—' }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="!student && !loading && !error" class="empty-state">
+    <p>No student found.</p>
+    <button class="btn btn-primary" (click)="backToList()">Back to List</button>
+  </div>
+</div>
